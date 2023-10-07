@@ -1,23 +1,19 @@
 import { useEffect, useState, createContext } from "react";
-import { profileController } from "../controller/UserController";
+import { miniProfileController } from "../controller/UserController";
 
 export const UserContext = createContext({});
 
 export function UserContextProvider({ children }) {
   const [userName, setUserName] = useState();
-  const [id, setId] = useState();
-  const [firstName, setFirstName] = useState();
-  const [lastName, setLastName] = useState();
+  const [userId, setUserId] = useState();
   useEffect(() => {
     async function fetchData() {
-      const response = await profileController();
+      const response = await miniProfileController();
       let data;
       response ? (data = response) : (data = null);
       if (data) {
-        setId(data.id);
+        setUserId(data.userId);
         setUserName(data.userName);
-        setFirstName(data.firstName);
-        setLastName(data.lastName);
       }
     }
 
@@ -28,12 +24,8 @@ export function UserContextProvider({ children }) {
       value={{
         userName,
         setUserName,
-        id,
-        setId,
-        firstName,
-        setFirstName,
-        lastName,
-        setLastName,
+        userId,
+        setUserId,
       }}
     >
       {children}

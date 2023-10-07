@@ -5,7 +5,7 @@ import { UserContext } from "../context/UserContext";
 function Protected({ children }) {
   const user = useContext(UserContext);
 
-  if (!user.id) {
+  if (!user.userId) {
     return <Navigate to="/signin" replace={true}></Navigate>;
   }
   return children;

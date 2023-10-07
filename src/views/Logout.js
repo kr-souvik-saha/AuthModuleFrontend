@@ -4,23 +4,11 @@ import { Navigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 
 export default function Logout() {
-  const {
-    userName,
-    setUserName,
-    id,
-    setId,
-    firstName,
-    setFirstName,
-    lastName,
-    setLastName,
-  } = useContext(UserContext);
+  const { userName, setUserName, userId, setUserId } = useContext(UserContext);
 
   useEffect(() => {
     setUserName(null);
-    setId(null);
-    setFirstName(null);
-    setLastName(null);
-
+    setUserId(null);
     logoutController();
   }, []);
   return <Navigate to="/signin" replace={true}></Navigate>;

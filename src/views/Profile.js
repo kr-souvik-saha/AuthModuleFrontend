@@ -1,19 +1,12 @@
-import { useContext, useEffect } from "react";
-import { UserContext } from "../context/UserContext";
+import { useEffect, useState } from "react";
 import { profileController } from "../controller/UserController";
 import Home from "./Home";
 
 export default function Profile() {
-  const {
-    userName,
-    setUserName,
-    id,
-    setId,
-    firstName,
-    setFirstName,
-    lastName,
-    setLastName,
-  } = useContext(UserContext);
+  const [userId, setUserId] = useState();
+  const [userName, setUserName] = useState();
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
 
   useEffect(() => {
     async function fetchData() {
@@ -21,7 +14,7 @@ export default function Profile() {
       let data;
       response ? (data = response) : (data = null);
       if (data) {
-        setId(data.id);
+        setUserId(data.userId);
         setUserName(data.userName);
         setFirstName(data.firstName);
         setLastName(data.lastName);
@@ -34,7 +27,7 @@ export default function Profile() {
     <>
       <Home></Home>
       <div>
-        <h1>{`Hello! ${firstName} ${lastName} your userName is ${userName} and id is ${id}`}</h1>
+        <h1>{`Hello! ${firstName} ${lastName} your userName is ${userName} and id is ${userId}`}</h1>
       </div>
     </>
   );

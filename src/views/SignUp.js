@@ -1,4 +1,3 @@
-// import * as React from "react";
 import { useContext, useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -6,7 +5,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-// import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -36,23 +34,12 @@ function Copyright(props) {
   );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
 const defaultTheme = createTheme();
 
 export default function SignUp() {
   const [error, setError] = useState(null);
 
-  const {
-    userName,
-    setUserName,
-    id,
-    setId,
-    firstName,
-    setFirstName,
-    lastName,
-    setLastName,
-  } = useContext(UserContext);
+  const { userName, setUserName, userId, setUserId } = useContext(UserContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -66,8 +53,11 @@ export default function SignUp() {
     const userData = { firstName, lastName, userName, password };
     const response = await registerController(userData);
 
-    if (response.id) {
-      setId(response.id);
+    if (response.userId) {
+      setUserId(response.userId);
+    }
+    if (response.userName) {
+      setUserName(response.userId);
     }
     if (response.message) {
       setError(response.message);
@@ -76,7 +66,7 @@ export default function SignUp() {
 
   return (
     <>
-      {id && <Navigate to="/" replace={true}></Navigate>}
+      {userId && <Navigate to="/" replace={true}></Navigate>}
       <ThemeProvider theme={defaultTheme}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />

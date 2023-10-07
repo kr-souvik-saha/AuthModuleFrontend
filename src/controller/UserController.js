@@ -2,6 +2,7 @@ import {
     loginModel,
     logoutModel,
     profileModel,
+    miniProfileModel,
     registerModel
 } from "../models/UserModel";
 
@@ -47,6 +48,11 @@ const profileController = async () => {
     return response;
 }
 
+const miniProfileController = async () => {
+    const response = await miniProfileModel().then(res => res).catch(err => err);
+    return response;
+}
+
 const logoutController = async () => {
     const response = await logoutModel().then(res => res).catch(err => err);
     return response;
@@ -56,5 +62,6 @@ export {
     registerController,
     loginController,
     profileController,
+    miniProfileController,
     logoutController
 }

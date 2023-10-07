@@ -40,16 +40,7 @@ const defaultTheme = createTheme();
 export default function SignIn() {
   const [error, setError] = useState(null);
 
-  const {
-    userName,
-    setUserName,
-    id,
-    setId,
-    firstName,
-    setFirstName,
-    lastName,
-    setLastName,
-  } = useContext(UserContext);
+  const { userName, setUserName, userId, setUserId } = useContext(UserContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -62,8 +53,11 @@ export default function SignIn() {
 
     const response = await loginController(userData);
 
-    if (response.id) {
-      setId(response.id);
+    if (response.userId) {
+      setUserId(response.userId);
+    }
+    if (response.userName) {
+      setUserName(response.userId);
     }
     if (response.message) {
       setError(response.message);
@@ -72,7 +66,7 @@ export default function SignIn() {
 
   return (
     <>
-      {id && <Navigate to="/" replace={true}></Navigate>}
+      {userId && <Navigate to="/" replace={true}></Navigate>}
       <ThemeProvider theme={defaultTheme}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
